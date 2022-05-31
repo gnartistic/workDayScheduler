@@ -17,7 +17,6 @@ function main() {
         var hourEl = document.createElement('div');
         hourEl.setAttribute('class', 'col-sm-1 hour');
         var DescriptionEl = document.createElement('textarea');
-        DescriptionEl.setAttribute('id', 'draggable');
         var saveBtnEl = document.createElement('button');
         saveBtnEl.setAttribute('class', 'col-sm-1 saveBtn');
 
