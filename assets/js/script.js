@@ -1,39 +1,66 @@
-// html variables
-var currentDayEl = $("#currentDay");
-var containerEl = $(".container");
+//html variables
+var currentDayEl = $('#currentDay');
+var containerEl = $('.container');
 
+//runs after events are initialized fills out rows with content
 function main() {
-    currentDayEl.text(moment().format("dddd, MMMM Do"));
-    var timeEl = parseInt(document.getElementsByClassName("timeDisp").innerText);
-    var maxHours = 8;
-    var offsetHours = 9;
+    currentDayEl.text(moment().format("dddd, MMMM Do")); //on start create the up-to-date title at the top
+    var maxHours = 8; //8 hours a day
+    var offsetHours = 9 //start at 9am
+    //create my times
+    for (var hour = offsetHours; hour <= maxHours + offsetHours; hour++) { //loop over every hour and create a row for every hour
+        //div row that holds all the stuffs
+        var timeRowEl = document.createElement('div');
+        timeRowEl.setAttribute('class', 'row time-block');
 
-    var timeAtIndex = formatMilitaryTime(hour);
-    var descriptionEl = document.getElementsByClassName("descriptionEl");
-    for (var hour = offsetHours; hour <= maxHours + offsetHours; i < hour++) {
-        if (timeEl == moment().hour()) {
-            $(".descriptionEl").attr("class", "descriptionEl col-sm-10 present");
-        } else if (timeEl < moment().hour()) {
-            $(".descriptionEl").attr("class", "descriptionEl col-sm-10 past");
-        } else {
-            $(".descriptionEl").attr("class", "descriptionEl col-sm-10 future");
+        //the 3 objects in the row to fill
+        var hourEl = document.createElement('div');
+        hourEl.setAttribute('class', 'col-sm-1 hour');
+        var DescriptionEl = document.createElement('textarea');
+        DescriptionEl.setAttribute('id', 'draggable');
+        var saveBtnEl = document.createElement('button');
+        saveBtnEl.setAttribute('class', 'col-sm-1 saveBtn');
+
+        //format the time to usable format like 9am or 5pm
+        var timeAtIndex = formatMilitaryTime(hour);
+        hourEl.textContent = timeAtIndex; //set textcontent on time to the formatted version
+
+        if (hour < moment().hour()) { //if below current time then its past that time
+            DescriptionEl.setAttribute('class', 'col-sm-10 description past');
+        } else if (hour == moment().hour()) { //if the hour is equivalent then its that hour
+            DescriptionEl.setAttribute('class', 'col-sm-10 description present');
+        } else { //anything else hasnt been reached so its the future
+            DescriptionEl.setAttribute('class', 'col-sm-10 description future');
         }
+
+        var saveIconEL = document.createElement('img') //add the image for the save button
+        saveIconEL.setAttribute('src', './assets/images/saveicon.png')
+        saveBtnEl.append(saveIconEL); //slap the image onto the save button
 
         var tempArr = JSON.parse(localStorage.getItem('events')); //check if theres a event at this timeslot on this day
         if (tempArr != null) { //as long as its not empty try
             for (let index = 0; index < tempArr.length; index++) { //loop over all saved events
-                if ((timeEl.textContent == tempArr[index].eventTime) && (moment().dayOfYear() == tempArr[index].dayOfYear)) {
-                    descriptionEl.textContent = tempArr[index].eventDescription;
-                    descriptionEl.setAttribute('id', 'saved-item');
+                if ((hourEl.textContent == tempArr[index].eventTime) && (moment().dayOfYear() == tempArr[index].dayOfYear)) {
+                    DescriptionEl.textContent = tempArr[index].eventDescription;
+                    DescriptionEl.setAttribute('id', 'saved-item');
                 }
             }
         }
-        return;
+
+        //append items into the row in correct order
+        timeRowEl.append(hourEl);
+        timeRowEl.append(DescriptionEl);
+        timeRowEl.append(saveBtnEl);
+
+        //append rows onto the container
+        containerEl.append(timeRowEl);
     }
+
+    return;
 }
 
 function formatMilitaryTime(hour) {
-    var suffix = "";
+    var suffix = '';
 
     if (hour > 23) { //if over 24 hours reset back to morning
         if (hour == 24) {//if midnight make it 12am
@@ -64,7 +91,7 @@ function formatMilitaryTime(hour) {
     }
     hour = hour + suffix; //add the suffix that was chosen
 
-    return time
+    return hour
 }
 
 //on click of a button trigger a save event scenario
@@ -110,9 +137,11 @@ function saveEventData(event) {
 
     return;
 }
+
+//initialize the event click for the save button
 function init() {
-    containerEl.on("click", saveEventData);
-    main();
+    containerEl.on('click', saveEventData);
+    main(); //call to start creating objects
 }
 
 init();
