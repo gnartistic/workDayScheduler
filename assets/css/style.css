@@ -49,15 +49,15 @@ textarea {
 }
 
 .past {
-  background-color: #d3d3d3;
+  background-color: #cccccc;
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: #f14d57;
 }
 
 .future {
-  background-color: #77dd77;
+  background-color: #74e96e;
 }
 
 .saveBtn {
