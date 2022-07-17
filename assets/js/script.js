@@ -18,7 +18,7 @@ function main() {
         hourEl.setAttribute("class", "column is-1 is-12-mobile hour has-background-grey-lighter");
         hourEl.setAttribute("style", "font-family: 'Edu VIC WA NT Beginner', cursive; font-size: 3vh;");
         var DescriptionEl = document.createElement("textarea");
-        var saveBtnEl = document.createElement("div");
+        var saveBtnEl = document.createElement("button");
         saveBtnEl.setAttribute("class", "column is-1 is-12-mobile button is-large saveBtn");
 
         //format the time to usable format like 9am or 5pm
