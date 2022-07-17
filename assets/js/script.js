@@ -5,8 +5,8 @@ var containerEl = $(".container");
 //runs after events are initialized fills out rows with content
 function main() {
     currentDayEl.text(moment().format("dddd, MMMM Do")); //on start create the up-to-date title at the top
-    var maxHours = 8; //8 hours a day
-    var offsetHours = 21; //start at 9am
+    var maxHours = 24; //8 hours a day
+    var offsetHours = 1; //start at 9am
     //create my times
     for (var hour = offsetHours; hour <= maxHours + offsetHours; hour++) { //loop over every hour and create a row for every hour
         //div row that holds all the stuffs
@@ -32,6 +32,11 @@ function main() {
         } else { //anything else hasnt been reached so its the future
             DescriptionEl.setAttribute("class", "column is-10 is-12-mobile description future");
         }
+
+        if (hour > 7 && hour < 16) {
+            DescriptionEl.setAttribute("class", "column is-10 is-12-mobile description has-background-is-grey has-text-grey-lighter");
+        }
+
 
         var saveIconEL = document.createElement("i") //add the image for the save button
         saveIconEL.setAttribute("class", "fa-solid fa-meteor");
