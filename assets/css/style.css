@@ -33,11 +33,11 @@ textarea {
   text-align: center;
   border-radius: 15px;
 }
-
-.row {
+ .button {
+  height: auto;
+ }
+.columns {
   white-space: pre-wrap;
-  height: 80px;
-  border-top: 1px solid white;
 }
 
 .hour {
@@ -49,27 +49,45 @@ textarea {
 }
 
 .past {
-  background-color: #cccccc;
+  background-color: #F3E13F;
+}
+
+.past:hover {
+  background-color: #F0DB19;
+  transition: all 0.3s ease-in-out;
 }
 
 .present {
-  background-color: #f14d57;
+  background-color: #E5625E;
+}
+
+.present:hover {
+  background-color: #E87773;
+  transition: all 0.03s ease-in-out;
 }
 
 .future {
-  background-color: #74e96e;
+  background-color: #62A87C;
+}
+
+.future:hover {
+  background-color: #7BB791;
+  transition: all 0.3s ease-in-out;
 }
 
 .saveBtn {
   border: 0;
   border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #06aed5;
+  background-color: #6FACFD;
   color: white;
 }
 
 .saveBtn:hover {
-  background-color: #7cc4d4;
+  background-color: #4F7AFD;
   transition: all 0.3s ease-in-out;
+}
+
+textarea {
+  font-family: 'Edu VIC WA NT Beginner', cursive;
+  font-size: 2.5vh;
 }

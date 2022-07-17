@@ -6,34 +6,35 @@ var containerEl = $(".container");
 function main() {
     currentDayEl.text(moment().format("dddd, MMMM Do")); //on start create the up-to-date title at the top
     var maxHours = 8; //8 hours a day
-    var offsetHours = 9 //start at 9am
+    var offsetHours = 21; //start at 9am
     //create my times
     for (var hour = offsetHours; hour <= maxHours + offsetHours; hour++) { //loop over every hour and create a row for every hour
         //div row that holds all the stuffs
         var timeRowEl = document.createElement("div");
-        timeRowEl.setAttribute("class", "row time-block");
+        timeRowEl.setAttribute("class", "columns pb-2");
 
         //the 3 objects in the row to fill
         var hourEl = document.createElement("div");
-        hourEl.setAttribute("class", "col-sm-1 hour");
+        hourEl.setAttribute("class", "column is-1 is-12-mobile hour has-background-grey-lighter");
+        hourEl.setAttribute("style", "font-family: 'Edu VIC WA NT Beginner', cursive; font-size: 3vh;");
         var DescriptionEl = document.createElement("textarea");
-        var saveBtnEl = document.createElement("button");
-        saveBtnEl.setAttribute("class", "col-sm-1 saveBtn");
+        var saveBtnEl = document.createElement("div");
+        saveBtnEl.setAttribute("class", "column is-1 is-12-mobile button is-large saveBtn");
 
         //format the time to usable format like 9am or 5pm
         var timeAtIndex = formatMilitaryTime(hour);
         hourEl.textContent = timeAtIndex; //set textcontent on time to the formatted version
 
         if (hour < moment().hour()) { //if below current time then its past that time
-            DescriptionEl.setAttribute("class", "col-sm-10 description past");
+            DescriptionEl.setAttribute("class", "column is-10 is-12-mobile description past");
         } else if (hour == moment().hour()) { //if the hour is equivalent then its that hour
-            DescriptionEl.setAttribute("class", "col-sm-10 description present");
+            DescriptionEl.setAttribute("class", "column is-10 is-12-mobile description present");
         } else { //anything else hasnt been reached so its the future
-            DescriptionEl.setAttribute("class", "col-sm-10 description future");
+            DescriptionEl.setAttribute("class", "column is-10 is-12-mobile description future");
         }
 
         var saveIconEL = document.createElement("i") //add the image for the save button
-        saveIconEL.setAttribute("class", "fa-solid fa-floppy-disk")
+        saveIconEL.setAttribute("class", "fa-solid fa-meteor");
         saveBtnEl.append(saveIconEL); //slap the image onto the save button
 
         var tempArr = JSON.parse(localStorage.getItem("events")); //check if theres a event at this timeslot on this day
